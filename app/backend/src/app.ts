@@ -1,4 +1,6 @@
 import * as express from 'express';
+import LoginController from './database/controllers/Login.controller';
+import validateLoginData from './middlewares/ValidateLoginData.middleware';
 
 class App {
   public app: express.Express;
@@ -8,6 +10,7 @@ class App {
 
     this.config();
 
+    this.app.post('/login', validateLoginData, LoginController.login);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }

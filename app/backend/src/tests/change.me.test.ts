@@ -14,7 +14,7 @@ const { app } = new App();
 
 const { expect } = chai;
 
-describe('Seu teste', () => {
+// describe('Seu teste', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
@@ -41,7 +41,18 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  });
-});
+  // it('Seu sub-teste', () => {
+  //   expect(false).to.be.eq(true);
+  // });
+// });
+
+describe('Testa a rota /login', () => {
+
+  let chaiHttpResponse: Response;
+
+  it('1. A rota login existe e é do tipo post', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login')
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+  })
+})
