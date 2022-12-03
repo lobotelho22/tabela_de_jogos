@@ -1,4 +1,4 @@
-import IError from './Error.interace';
+import IError from './Error.interface';
 import Login from './Login.interface';
 import User from './User.interface';
 

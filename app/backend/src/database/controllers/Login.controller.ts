@@ -6,11 +6,15 @@ class LoginController {
     const loginInfo = req.body;
     const response = await LoginService.login(loginInfo);
 
-    // if (response.statusCode !== null) {
-    //   return res.status(response.statusCode).json({ message: response.message });
-    // }
+    return res.status(response.statusCode).json(response.message);
+  }
 
-    return res.status(response.statusCode).json({ message: response.message });
+  public static async validateRoute(req: Request, res: Response) {
+    const authToken = req.headers.authorization;
+
+    const response = await LoginService.loginValidate(authToken);
+
+    return res.status(response.statusCode).json(response.message);
   }
 }
 
