@@ -6,11 +6,11 @@ class LoginController {
     const loginInfo = req.body;
     const response = await LoginService.login(loginInfo);
 
-    if (response.statusCode !== null) {
-      return res.status(response.statusCode).json({ message: response.message });
-    }
+    // if (response.statusCode !== null) {
+    //   return res.status(response.statusCode).json({ message: response.message });
+    // }
 
-    res.status(200).json({ message: response.message });
+    return res.status(response.statusCode).json({ message: response.message });
   }
 }
 

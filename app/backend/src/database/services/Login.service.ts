@@ -20,7 +20,7 @@ class LoginService {
     const token = generateToken(userData.dataValues.username);
 
     return {
-      statusCode: null,
+      statusCode: 200,
       message: token,
     };
   }
