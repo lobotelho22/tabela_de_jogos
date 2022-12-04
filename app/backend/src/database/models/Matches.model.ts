@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
+import TeamModel from './Teams.model';
 // import OtherModel from './OtherModel';
 
 class MatchModel extends Model {
@@ -51,10 +52,12 @@ MatchModel.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-// TeamModel.belongsTo(MatchModel, { foreignKey: 'homeTeam', as: 'id' });
-// TeamModel.belongsTo(MatchModel, { foreignKey: 'awayTeam', as: 'id' });
+MatchModel.belongsTo(TeamModel, { foreignKey: 'homeTeam', as: 'home_team' });
+MatchModel.belongsTo(TeamModel, { foreignKey: 'awayTeam', as: 'away_team' });
 // OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
 
+TeamModel.hasMany(MatchModel, { foreignKey: 'homeTeam', as: 'homeTeam' });
+TeamModel.hasMany(MatchModel, { foreignKey: 'awayTeam', as: 'awayTeam' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 

@@ -1,5 +1,6 @@
 import * as express from 'express';
 import LoginController from './database/controllers/Login.controller';
+import MatchesController from './database/controllers/Matches.controller';
 import TeamsController from './database/controllers/Teams.controller';
 import validateLoginData from './middlewares/ValidateLoginData.middleware';
 
@@ -16,6 +17,8 @@ class App {
 
     this.app.get('/teams', TeamsController.listAllTeams);
     this.app.get('/teams/:id', TeamsController.listOneTeam);
+
+    this.app.get('/matches', MatchesController.listMatches);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
