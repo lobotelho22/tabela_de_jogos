@@ -1,5 +1,6 @@
 import * as express from 'express';
 import LoginController from './database/controllers/Login.controller';
+import TeamsController from './database/controllers/Teams.controller';
 import validateLoginData from './middlewares/ValidateLoginData.middleware';
 
 class App {
@@ -12,6 +13,9 @@ class App {
 
     this.app.post('/login', validateLoginData, LoginController.login);
     this.app.get('/login/validate', LoginController.validateRoute);
+
+    this.app.get('/teams', TeamsController.listAllTeams);
+    this.app.get('/teams/:id', TeamsController.listOneTeam);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }

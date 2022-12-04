@@ -7,7 +7,7 @@ import App from '../app';
 // import Example from '../database/models/ExampleModel';
 
 import { Response } from 'superagent';
-import UserModel from '../database/models/Users';
+import UserModel from '../database/models/Users.model';
 import { correctDataRequestMock, incorrectDataRequestMock, loginMockData, noEmailRequestMock, noPassRequestMock, validTokenReturn } from './mocks/Login.mocks';
 import LoginService from '../database/services/Login.service';
 

@@ -1,4 +1,4 @@
-interface IError {
+interface IReturnInfo {
   statusCode: number;
   message: {
     message?: string,
@@ -7,4 +7,4 @@ interface IError {
   };
 }
 
-export default IError;
+export default IReturnInfo;

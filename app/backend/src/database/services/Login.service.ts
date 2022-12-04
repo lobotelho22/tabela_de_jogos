@@ -2,11 +2,11 @@ import { compare } from 'bcryptjs';
 import { JwtPayload } from 'jsonwebtoken';
 import validateToken from '../../utils/validateToken';
 import generateToken from '../../utils/generateToken';
-import UserModel from '../models/Users';
-import { Login, IError } from '../../interfaces/index';
+import UserModel from '../models/Users.model';
+import { Login, IReturnInfo } from '../../interfaces/index';
 
 class LoginService {
-  public static async login(loginInfo: Login): Promise<IError> {
+  public static async login(loginInfo: Login): Promise<IReturnInfo> {
     const { email, password } = loginInfo;
     let testPass = false;
 
@@ -30,7 +30,7 @@ class LoginService {
     };
   }
 
-  public static async loginValidate(authToken: string | undefined): Promise<IError> {
+  public static async loginValidate(authToken: string | undefined): Promise<IReturnInfo> {
     let isValid : string | JwtPayload = '';
 
     if (authToken !== undefined) {
