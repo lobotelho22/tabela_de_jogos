@@ -37,4 +37,36 @@ describe('Testa a rota /Matches', () => {
     sinon.restore();
   });
 
+  it('11. A rota matches permite buscas pela query "inProgress=false"', async () => {
+
+    sinon
+    .stub(MatchModel, "findAll")
+    .resolves([
+      matchesDataMock[0]
+    ] as any);
+
+    chaiHttpResponse = await chai.request(app).get('/matches').query({ inProgress: false });
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.deep.equal([allMatchesMock[0]]);
+
+    sinon.restore();
+  });
+
+  it('12. A rota matches permite buscas pela query "inProgress=true"', async () => {
+
+    sinon
+    .stub(MatchModel, "findAll")
+    .resolves([
+      matchesDataMock[1]
+    ] as any);
+
+    chaiHttpResponse = await chai.request(app).get('/matches').query({ inProgress: true });
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.deep.equal([allMatchesMock[1]]);
+
+    sinon.restore();
+  });
+
 })

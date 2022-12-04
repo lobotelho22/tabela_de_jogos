@@ -18,7 +18,7 @@ const matchesDataMock = [
       homeTeamGoals: 3,
       awayTeam: 9,
       awayTeamGoals: 1,
-      inProgress: false,
+      inProgress: true,
       home_team: { id: 13, teamName: "Flamengo" },
       away_team: { id: 9, teamName: "Internacional" },
     },
@@ -42,7 +42,7 @@ const allMatchesMock = [
     homeTeamGoals: 3,
     awayTeam: 9,
     awayTeamGoals: 1,
-    inProgress: false,
+    inProgress: true,
     teamHome: { teamName: 'Flamengo' },
     teamAway: { teamName: 'Internacional' }
   }
