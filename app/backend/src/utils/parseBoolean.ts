@@ -7,7 +7,6 @@ function parseBoolean(queryInfo: QueryInfo): boolean | undefined {
   if (inProgress === undefined) { return undefined; }
 
   const booleanValue = inProgress.toLowerCase() === 'true';
-  console.log(booleanValue);
 
   return booleanValue;
 }

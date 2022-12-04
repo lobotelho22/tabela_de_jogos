@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { IMatch } from '../../interfaces/index';
 import parseBoolean from '../../utils/parseBoolean';
 import MatchesService from '../services/Matches.service';
 
@@ -18,6 +19,20 @@ class MatchesController {
       const result = await MatchesService.getMatchesNotInProgress();
       return res.status(200).json(result);
     }
+  }
+
+  public static async saveMatchInfo(req: Request, res: Response) {
+    const insertData: IMatch = {
+      homeTeam: req.body.homeTeam,
+      homeTeamGoals: req.body.homeTeamGoals,
+      awayTeam: req.body.awayTeam,
+      awayTeamGoals: req.body.awayTeamGoals,
+      inProgress: true,
+    };
+
+    const newMatch = await MatchesService.saveMatch(insertData);
+
+    return res.status(newMatch.statusCode).json(newMatch.message.newMatch);
   }
 }
 

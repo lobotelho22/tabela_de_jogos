@@ -1,5 +1,5 @@
 import createMatchesList from '../../utils/createMatchesList';
-import { IMatch } from '../../interfaces/index';
+import { IMatch, IReturnInfo } from '../../interfaces/index';
 import MatchModel from '../models/Matches.model';
 import TeamModel from '../models/Teams.model';
 
@@ -39,6 +39,15 @@ class MatchesService {
     const matchesList = createMatchesList(matchesData);
 
     return matchesList;
+  }
+
+  public static async saveMatch(insertData: IMatch): Promise<IReturnInfo> {
+    const test = await MatchModel.create({ ...insertData });
+
+    return {
+      statusCode: 201,
+      message: { newMatch: test.dataValues },
+    };
   }
 }
 

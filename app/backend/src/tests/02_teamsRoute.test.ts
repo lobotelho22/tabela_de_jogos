@@ -16,11 +16,11 @@ const { app } = new App();
 
 const { expect } = chai;
 
-describe('Testa a rota /teams', () => {
+describe('Testa o endpoint /teams', () => {
 
   let chaiHttpResponse: Response;
 
-  it('7. A rota teams existe e retorna uma lista de times', async () => {
+  it('7. O endpoint teams existe e retorna uma lista de times', async () => {
     sinon
     .stub(TeamModel, "findAll")
     .resolves( [...teamListMock] as Array<any>);
@@ -33,7 +33,7 @@ describe('Testa a rota /teams', () => {
     sinon.restore();
   });
 
-  it('8. A rota teams/:id retorna erro para id inexistente', async () => {
+  it('8. O endpoint teams/:id retorna erro para id inexistente', async () => {
     chaiHttpResponse = await chai.request(app).get('/teams/18');
     
     expect(chaiHttpResponse.body).to.deep.equal({ message: 'Incorrect team id' });
@@ -41,7 +41,7 @@ describe('Testa a rota /teams', () => {
   });
 
 
-  it('9. A rota teams/:id retorna informação de um time', async () => {
+  it('9. O endpoint teams/:id retorna informação de um time', async () => {
     sinon
     .stub(TeamModel, "findOne")
     .resolves( { ...teamMock } as any);

@@ -17,7 +17,7 @@ const { app } = new App();
 
 const { expect } = chai;
 
-describe('Testa a rota /login', () => {
+describe('Testa o endpoint /login', () => {
 
   let chaiHttpResponse: Response;
 
@@ -33,7 +33,7 @@ describe('Testa a rota /login', () => {
     sinon.restore();
   })
 
-  it('1. A rota login existe e é do tipo post', async () => {
+  it('1. A o endpoint existe e é uma rota do tipo post', async () => {
     chaiHttpResponse = await chai.request(app).post('/login');
 
     expect(chaiHttpResponse.status).to.be.equal(400);
@@ -66,7 +66,7 @@ describe('Testa a rota /login', () => {
     expect(chaiHttpResponse.body).to.deep.equal({ message: 'Incorrect email or password' });
   })
 
-  it('6. Verifica a existência da rota /login/validate', async () => {
+  it('6. Verifica a existência do endpoint /login/validate e que ele retorna o role do usuário', async () => {
     sinon.stub(LoginService, 'loginValidate').resolves(validTokenReturn)
 
     chaiHttpResponse = await chai.request(app).get('/login/validate')

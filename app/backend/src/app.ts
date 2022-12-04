@@ -3,6 +3,7 @@ import LoginController from './database/controllers/Login.controller';
 import MatchesController from './database/controllers/Matches.controller';
 import TeamsController from './database/controllers/Teams.controller';
 import validateLoginData from './middlewares/ValidateLoginData.middleware';
+import validationFunctions from './middlewares/validations.middleware';
 
 class App {
   public app: express.Express;
@@ -19,6 +20,12 @@ class App {
     this.app.get('/teams/:id', TeamsController.listOneTeam);
 
     this.app.get('/matches', MatchesController.listMatches);
+    this.app.post(
+      '/matches',
+      validationFunctions.validateTeamsId,
+      validationFunctions.validateTokenMid,
+      MatchesController.saveMatchInfo,
+    );
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }

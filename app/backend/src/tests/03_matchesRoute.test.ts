@@ -4,12 +4,14 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import App from '../app';
-// import Example from '../database/models/ExampleModel';
 
 import { Response } from 'superagent';
 import MatchModel from '../database/models/Matches.model';
-import { allMatchesMock, matchesDataMock } from './mocks/Mathes.mock';
-
+import { allMatchesMock, equalTeamsBody, invalidIdReturn, invalidTeamBody, matchesDataMock, validateTokenFail, validateTokenReturnOk, validToken } from './mocks/Matches.mock';
+import validationFunctions from '../middlewares/validations.middleware';
+import { JwtPayload } from 'jsonwebtoken';
+import { EQUAL_TEAMS_MSG, NO_TEAM_MSG } from '../utils/globalConstants';
+import TeamsService from '../database/services/Teams.service';
 
 chai.use(chaiHttp);
 
@@ -17,11 +19,11 @@ const { app } = new App();
 
 const { expect } = chai;
 
-describe('Testa a rota /Matches', () => {
+describe('Testa o endpopint /Matches', () => {
 
   let chaiHttpResponse: Response;
 
-  it('10. A rota matches existe e retorna uma lista de todas as partidas', async () => {
+  it('10. O endpoint matches existe e retorna uma lista de todas as partidas', async () => {
 
     sinon
     .stub(MatchModel, "findAll")
@@ -37,7 +39,7 @@ describe('Testa a rota /Matches', () => {
     sinon.restore();
   });
 
-  it('11. A rota matches permite buscas pela query "inProgress=false"', async () => {
+  it('11. O endpoint matches permite buscas pela query "inProgress=false"', async () => {
 
     sinon
     .stub(MatchModel, "findAll")
@@ -53,7 +55,7 @@ describe('Testa a rota /Matches', () => {
     sinon.restore();
   });
 
-  it('12. A rota matches permite buscas pela query "inProgress=true"', async () => {
+  it('12. O endpoint matches permite buscas pela query "inProgress=true"', async () => {
 
     sinon
     .stub(MatchModel, "findAll")
@@ -69,4 +71,61 @@ describe('Testa a rota /Matches', () => {
     sinon.restore();
   });
 
+
+  it('13. Verifica que o endopint não aceita um token inválido', async() => {
+
+    sinon
+      .stub(validationFunctions, "validateTokenMid")
+      .resolves(validateTokenFail as string)
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .post('/matches')
+      .set("Authorization", 'invalidToken');
+
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token must be a valid token' });
+
+    sinon.restore();
+  })
+
+  it('14. Verifica que não é possível cadastrar uma partida entre times iguais', async() => {
+
+    sinon
+      .stub(validationFunctions, "validateTokenMid")
+      .resolves(validateTokenReturnOk as JwtPayload)
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .post('/matches')
+      .set("Authorization", validToken)
+      .send(equalTeamsBody)
+
+    expect(chaiHttpResponse.status).to.be.equal(422);
+    expect(chaiHttpResponse.body).to.deep.equal({ message: EQUAL_TEAMS_MSG });
+
+    sinon.restore();
+  })
+
+  it('15. Verifica que não é possível cadastrar uma partida com um time inválido', async() => {
+
+    sinon
+      .stub(validationFunctions, "validateTokenMid")
+      .resolves(validateTokenReturnOk as JwtPayload)
+
+    sinon
+      .stub(TeamsService, "getTeamById")
+      .resolves(invalidIdReturn as any)
+
+    chaiHttpResponse = await chai
+      .request(app)
+      .post('/matches')
+      .set("Authorization", validToken)
+      .send(invalidTeamBody)
+
+    expect(chaiHttpResponse.status).to.be.equal(404);
+    expect(chaiHttpResponse.body).to.deep.equal(NO_TEAM_MSG);
+
+    sinon.restore();
+  })
 })
