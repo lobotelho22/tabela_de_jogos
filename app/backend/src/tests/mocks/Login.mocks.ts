@@ -32,6 +32,10 @@ const validTokenReturn = {
   message: { role: 'user' },
 }
 
+const roleOk = {
+  role: 'user',
+}
+
 export {
   loginMockData,
   noPassRequestMock,
@@ -39,4 +43,5 @@ export {
   correctDataRequestMock,
   incorrectDataRequestMock,
   validTokenReturn,
+  roleOk,
 }

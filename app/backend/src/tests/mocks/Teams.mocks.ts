@@ -28,4 +28,14 @@ const teamListOk = [
   { id: 3, teamName: "Botafogo" },
 ];
 
-export { teamListMock, teamListOk, teamMock };
+const infoTeamOk = {
+  id: 1,
+  teamName: 'Avaí/Kindermann',
+}
+
+export {
+  teamListMock,
+  teamListOk,
+  teamMock,
+  infoTeamOk
+};

@@ -8,7 +8,8 @@ import App from '../app';
 
 import { Response } from 'superagent';
 import TeamModel from '../database/models/Teams.model';
-import { teamListMock, teamListOk, teamMock } from './mocks/Teams.mocks'
+import { infoTeamOk, teamListMock, teamListOk, teamMock } from './mocks/Teams.mocks'
+import { ERROR_TEAM_ID } from '../utils/globalConstants';
 
 chai.use(chaiHttp);
 
@@ -40,7 +41,7 @@ describe('Testa o endpoint /teams', () => {
     
     chaiHttpResponse = await chai.request(app).get('/teams/18');
     
-    expect(chaiHttpResponse.body).to.deep.equal({ message: 'Incorrect team id' });
+    expect(chaiHttpResponse.body).to.deep.equal(ERROR_TEAM_ID);
     expect(chaiHttpResponse.status).to.be.equal(400);
     
     sinon.restore();
@@ -54,7 +55,7 @@ describe('Testa o endpoint /teams', () => {
 
     chaiHttpResponse = await chai.request(app).get('/teams/1');
 
-    expect(chaiHttpResponse.body).to.deep.equal({ id: 1, teamName: 'Avaí/Kindermann' });
+    expect(chaiHttpResponse.body).to.deep.equal(infoTeamOk);
     expect(chaiHttpResponse.status).to.be.equal(200);
 
     sinon.restore()
