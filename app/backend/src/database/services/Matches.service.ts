@@ -2,7 +2,12 @@ import createMatchesList from '../../utils/createMatchesList';
 import { IMatch, IReturnInfo } from '../../interfaces/index';
 import MatchModel from '../models/Matches.model';
 import TeamModel from '../models/Teams.model';
-import { FINISHED_MESSAGE } from '../../utils/globalConstants';
+import { FINISHED_MESSAGE, UPDATE_SCORE } from '../../utils/globalConstants';
+
+type scoreboard = {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+};
 
 class MatchesService {
   public static async getAllMatches(): Promise<IMatch[] | []> {
@@ -56,6 +61,14 @@ class MatchesService {
     return {
       statusCode: 200,
       message: FINISHED_MESSAGE,
+    };
+  }
+
+  public static async editScoreboard(id: number, scoreboard: scoreboard): Promise<IReturnInfo> {
+    await MatchModel.update({ ...scoreboard }, { where: { id } });
+    return {
+      statusCode: 200,
+      message: UPDATE_SCORE,
     };
   }
 }

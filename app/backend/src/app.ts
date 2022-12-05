@@ -28,7 +28,7 @@ class App {
     );
 
     this.app.patch('/matches/:id/finish', MatchesController.finishMatchById);
-    // this.app.patch('/matches/:id', MatchesController.finishMatchById);
+    this.app.patch('/matches/:id', MatchesController.editMatchScore);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }

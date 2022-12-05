@@ -40,6 +40,12 @@ class MatchesController {
     const finishedMatch = await MatchesService.finishMatch(Number(id));
     return res.status(finishedMatch.statusCode).json(finishedMatch.message);
   }
+
+  public static async editMatchScore(req: Request, res: Response) {
+    const { id } = req.params;
+    const updatedScoreboard = await MatchesService.editScoreboard(Number(id), req.body);
+    return res.status(updatedScoreboard.statusCode).json(updatedScoreboard.message);
+  }
 }
 
 export default MatchesController;
