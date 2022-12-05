@@ -18,7 +18,7 @@ class validationFunctions {
   public static async validateTeamsId(req: Request, res: Response, next: NextFunction) {
     const { homeTeam, awayTeam } = req.body;
 
-    if (!homeTeam || !awayTeam) { return res.status(401).json({ message: 'Verify sending data' }); }
+    // if (!homeTeam || !awayTeam) { return res.status(401).json({ message: 'Verify sending data' }); }
 
     if (homeTeam === awayTeam) { return res.status(422).json({ message: EQUAL_TEAMS_MSG }); }
 
@@ -32,7 +32,7 @@ class validationFunctions {
       const resultArray = await Promise.all(promiseResultArray);
       if (resultArray.includes(400)) { return res.status(404).json(NO_TEAM_MSG); }
     } catch (err) {
-      console.error('Erro ao processar validação');
+      console.error('Erro na tentativa de validação');
     }
 
     next();

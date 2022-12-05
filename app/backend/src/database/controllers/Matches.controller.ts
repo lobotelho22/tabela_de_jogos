@@ -34,6 +34,12 @@ class MatchesController {
 
     return res.status(newMatch.statusCode).json(newMatch.message.newMatch);
   }
+
+  public static async finishMatchById(req: Request, res: Response) {
+    const { id } = req.params;
+    const finishedMatch = await MatchesService.finishMatch(Number(id));
+    return res.status(finishedMatch.statusCode).json(finishedMatch.message);
+  }
 }
 
 export default MatchesController;
