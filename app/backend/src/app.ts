@@ -29,6 +29,8 @@ class App {
 
     this.app.patch('/matches/:id/finish', MatchesController.finishMatchById);
     this.app.patch('/matches/:id', MatchesController.editMatchScore);
+
+    this.app.get('/leaderboard/home', (req, res) => res.json('calminha'));
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
