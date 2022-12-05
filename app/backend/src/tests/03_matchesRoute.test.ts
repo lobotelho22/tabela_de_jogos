@@ -7,7 +7,7 @@ import App from '../app';
 
 import { Response } from 'superagent';
 import MatchModel from '../database/models/Matches.model';
-import { allMatchesMock, equalTeamsBody, invalidIdReturn, invalidTeamBody, matchesDataMock, teamBodyOk, validateTokenFail, validateTokenReturnOk, validToken } from './mocks/Matches.mock';
+import { allMatchesMock, equalTeamsBody, finishMatchOk, invalidIdReturn, invalidTeamBody, matchesDataMock, teamBodyOk, validateTokenFail, validateTokenReturnOk, validToken } from './mocks/Matches.mock';
 import validationFunctions from '../middlewares/validations.middleware';
 import { JwtPayload } from 'jsonwebtoken';
 import { EQUAL_TEAMS_MSG, NO_TEAM_MSG, FINISHED_MESSAGE } from '../utils/globalConstants';
@@ -109,7 +109,7 @@ describe('Testa o endpopint /Matches', () => {
       .send(equalTeamsBody)
 
     expect(chaiHttpResponse.status).to.be.equal(422);
-    expect(chaiHttpResponse.body).to.deep.equal({ message: EQUAL_TEAMS_MSG });
+    expect(chaiHttpResponse.body).to.deep.equal(EQUAL_TEAMS_MSG);
 
     sinon.restore();
   })
@@ -139,7 +139,7 @@ describe('Testa o endpopint /Matches', () => {
   it('16. Testa se endpoint "matches/:id/finish" finaliza uma partida', async () => {
     sinon
       .stub(MatchesService, "finishMatch")
-      .resolves({ statusCode: 201, message: FINISHED_MESSAGE } as IReturnInfo)
+      .resolves(finishMatchOk as IReturnInfo)
     
     chaiHttpResponse = await chai
       .request(app)

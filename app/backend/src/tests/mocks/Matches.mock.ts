@@ -1,3 +1,5 @@
+import { FINISHED_MESSAGE } from "../../utils/globalConstants";
+
 const matchesDataMock = [
   {
     dataValues: {
@@ -88,6 +90,11 @@ const invalidIdReturn = {
   message: { message: 'Incorrect team id' },
 }
 
+const finishMatchOk = {
+  statusCode: 200,
+  message: FINISHED_MESSAGE,
+}
+
 export { matchesDataMock,
   allMatchesMock,
   validToken,
@@ -97,4 +104,5 @@ export { matchesDataMock,
   invalidTeamBody,
   invalidIdReturn,
   teamBodyOk,
+  finishMatchOk,
 };

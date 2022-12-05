@@ -1,3 +1,4 @@
+import { ERROR_TEAM_ID } from '../../utils/globalConstants';
 import { IReturnInfo } from '../../interfaces/index';
 import Team from '../../interfaces/Team.interface';
 import TeamModel from '../models/Teams.model';
@@ -16,7 +17,7 @@ class TeamsService {
     if (!teamData) {
       return {
         statusCode: 400,
-        message: { message: 'Incorrect team id' },
+        message: ERROR_TEAM_ID,
       };
     }
 
