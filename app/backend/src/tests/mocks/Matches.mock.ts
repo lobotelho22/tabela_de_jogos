@@ -76,6 +76,13 @@ const invalidTeamBody = {
   awayTeamGoals: 2
 }
 
+const teamBodyOk = {
+  homeTeam: 13,
+  awayTeam: 16,
+  homeTeamGoals: 2,
+  awayTeamGoals: 2
+}
+
 const invalidIdReturn = {
   statusCode: 400,
   message: { message: 'Incorrect team id' },
@@ -88,5 +95,6 @@ export { matchesDataMock,
   validateTokenFail,
   equalTeamsBody,
   invalidTeamBody,
-  invalidIdReturn
+  invalidIdReturn,
+  teamBodyOk,
 };

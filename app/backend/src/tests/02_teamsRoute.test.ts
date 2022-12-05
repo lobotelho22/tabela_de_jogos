@@ -34,10 +34,16 @@ describe('Testa o endpoint /teams', () => {
   });
 
   it('8. O endpoint teams/:id retorna erro para id inexistente', async () => {
+    sinon
+    .stub(TeamModel, "findOne")
+    .resolves( null as any);
+    
     chaiHttpResponse = await chai.request(app).get('/teams/18');
     
     expect(chaiHttpResponse.body).to.deep.equal({ message: 'Incorrect team id' });
     expect(chaiHttpResponse.status).to.be.equal(400);
+    
+    sinon.restore();
   });
 
 

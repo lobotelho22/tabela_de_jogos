@@ -7,11 +7,12 @@ import App from '../app';
 
 import { Response } from 'superagent';
 import MatchModel from '../database/models/Matches.model';
-import { allMatchesMock, equalTeamsBody, invalidIdReturn, invalidTeamBody, matchesDataMock, validateTokenFail, validateTokenReturnOk, validToken } from './mocks/Matches.mock';
+import { allMatchesMock, equalTeamsBody, invalidIdReturn, invalidTeamBody, matchesDataMock, teamBodyOk, validateTokenFail, validateTokenReturnOk, validToken } from './mocks/Matches.mock';
 import validationFunctions from '../middlewares/validations.middleware';
 import { JwtPayload } from 'jsonwebtoken';
 import { EQUAL_TEAMS_MSG, NO_TEAM_MSG } from '../utils/globalConstants';
 import TeamsService from '../database/services/Teams.service';
+import { IReturnInfo } from '../interfaces';
 
 chai.use(chaiHttp);
 
@@ -68,11 +69,15 @@ describe('Testa o endpopint /Matches', () => {
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.deep.equal([allMatchesMock[1]]);
 
-    sinon.restore();
+    // sinon.restore();
   });
 
 
   it('13. Verifica que o endopint não aceita um token inválido', async() => {
+
+    sinon
+      .stub(TeamsService, "getTeamById")
+      .resolves({ statusCode: 200} as IReturnInfo)
 
     sinon
       .stub(validationFunctions, "validateTokenMid")
@@ -81,7 +86,8 @@ describe('Testa o endpopint /Matches', () => {
     chaiHttpResponse = await chai
       .request(app)
       .post('/matches')
-      .set("Authorization", 'invalidToken');
+      .set("Authorization", 'invalidToken')
+      .send(teamBodyOk)
 
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).to.deep.equal({ message: 'Token must be a valid token' });
@@ -123,7 +129,7 @@ describe('Testa o endpopint /Matches', () => {
       .set("Authorization", validToken)
       .send(invalidTeamBody)
 
-    expect(chaiHttpResponse.status).to.be.equal(404);
+    expect(chaiHttpResponse.status).to.be.equal(404); 
     expect(chaiHttpResponse.body).to.deep.equal(NO_TEAM_MSG);
 
     sinon.restore();
