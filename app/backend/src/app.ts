@@ -1,4 +1,5 @@
 import * as express from 'express';
+import LeaderboardController from './database/controllers/Leaderboard.controller';
 import LoginController from './database/controllers/Login.controller';
 import MatchesController from './database/controllers/Matches.controller';
 import TeamsController from './database/controllers/Teams.controller';
@@ -30,7 +31,7 @@ class App {
     this.app.patch('/matches/:id/finish', MatchesController.finishMatchById);
     this.app.patch('/matches/:id', MatchesController.editMatchScore);
 
-    this.app.get('/leaderboard/home', (req, res) => res.json('calminha'));
+    this.app.get('/leaderboard/home', LeaderboardController.HomeStats);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
