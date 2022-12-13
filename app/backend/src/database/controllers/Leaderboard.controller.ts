@@ -13,6 +13,12 @@ class LeaderboardController {
     dataAwayMatches.sort((a, b) => LeaderboardService.sortLeaderboard(a, b));
     return res.status(200).json(dataAwayMatches);
   }
+
+  public static async AllStats(req: Request, res: Response) {
+    const allDataMatches = await LeaderboardService.getAllDataMatches();
+    allDataMatches.sort((a, b) => LeaderboardService.sortLeaderboard(a, b));
+    return res.status(200).json(allDataMatches);
+  }
 }
 
 export default LeaderboardController;

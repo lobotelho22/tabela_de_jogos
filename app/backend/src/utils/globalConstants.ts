@@ -8,6 +8,19 @@ const ERROR_TEAM_ID = { message: 'Incorrect team id' };
 const INVALID_TOKEN = { message: 'Token must be a valid token' };
 const ALL_FIELDS_MUST_BE_FILLED = { message: 'All fields must be filled' };
 
+const ERRORLEADERBOARD = {
+  name: 'ERROR',
+  totalPoints: 0,
+  totalGames: 0,
+  totalVictories: 0,
+  totalDraws: 0,
+  totalLosses: 0,
+  goalsFavor: 0,
+  goalsOwn: 0,
+  goalsBalance: 0,
+  efficiency: 'ERROR',
+};
+
 export {
   EQUAL_TEAMS_MSG,
   NO_TEAM_MSG,
@@ -18,4 +31,5 @@ export {
   ERROR_TEAM_ID,
   INVALID_TOKEN,
   ALL_FIELDS_MUST_BE_FILLED,
+  ERRORLEADERBOARD,
 };

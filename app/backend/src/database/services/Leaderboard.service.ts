@@ -1,8 +1,53 @@
+import { ERRORLEADERBOARD } from '../../utils/globalConstants';
 import { ILeaderboard, IMatch, IResults, IGoalsInfo } from '../../interfaces';
 import MatchesService from './Matches.service';
 import TeamsService from './Teams.service';
 
 class LeaderboardService {
+  public static async getAllDataMatches() {
+    const awayDataMatches = await LeaderboardService.getDataAwayMatches();
+    const homeDataMatches: ILeaderboard[] = await LeaderboardService.getDataHomeMatches();
+
+    const allMatchesData = awayDataMatches.map((awayTeam) => {
+      const homeTeam = homeDataMatches.find((team) => team.name === awayTeam.name);
+      if (!homeTeam) { return ERRORLEADERBOARD; }
+
+      const allStats = LeaderboardService.getAllStats(homeTeam, awayTeam);
+
+      return {
+        name: homeTeam.name,
+        ...allStats,
+      };
+    });
+
+    return allMatchesData;
+  }
+
+  private static getAllStats(homeTeam: ILeaderboard, awayTeam: ILeaderboard) {
+    const totalGames = homeTeam.totalGames + awayTeam.totalGames;
+
+    const results = {
+      totalVictories: homeTeam.totalVictories + awayTeam.totalVictories,
+      totalDraws: homeTeam.totalDraws + awayTeam.totalDraws,
+      totalLosses: homeTeam.totalLosses + awayTeam.totalLosses,
+    };
+
+    const goalsInfo = {
+      goalsFavor: homeTeam.goalsFavor + awayTeam.goalsFavor,
+      goalsOwn: homeTeam.goalsOwn + awayTeam.goalsOwn,
+      goalsBalance: (homeTeam.goalsFavor + awayTeam.goalsFavor)
+      - (homeTeam.goalsOwn + awayTeam.goalsOwn),
+    };
+
+    const finalDataStats = LeaderboardService.getFormatedData(results, goalsInfo, totalGames);
+
+    return {
+      totalPoints: LeaderboardService.getTotalPoints(results),
+      totalGames: homeTeam.totalGames + awayTeam.totalGames,
+      ...finalDataStats,
+    };
+  }
+
   public static async getDataAwayMatches() {
     const awayMatchesByTeams = await LeaderboardService.getDataAwayMatchesByTeams();
 

@@ -6,6 +6,8 @@ import TeamsController from './database/controllers/Teams.controller';
 import validateLoginData from './middlewares/ValidateLoginData.middleware';
 import validationFunctions from './middlewares/validations.middleware';
 
+const { validateTeamsId, validateTokenMid } = validationFunctions;
+
 class App {
   public app: express.Express;
 
@@ -21,18 +23,14 @@ class App {
     this.app.get('/teams/:id', TeamsController.listOneTeam);
 
     this.app.get('/matches', MatchesController.listMatches);
-    this.app.post(
-      '/matches',
-      validationFunctions.validateTeamsId,
-      validationFunctions.validateTokenMid,
-      MatchesController.saveMatchInfo,
-    );
+    this.app.post('/matches', validateTeamsId, validateTokenMid, MatchesController.saveMatchInfo);
 
     this.app.patch('/matches/:id/finish', MatchesController.finishMatchById);
     this.app.patch('/matches/:id', MatchesController.editMatchScore);
 
     this.app.get('/leaderboard/home', LeaderboardController.HomeStats);
     this.app.get('/leaderboard/away', LeaderboardController.AwayStats);
+    this.app.get('/leaderboard', LeaderboardController.AllStats);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
