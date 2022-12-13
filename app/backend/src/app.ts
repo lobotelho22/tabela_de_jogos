@@ -32,6 +32,7 @@ class App {
     this.app.patch('/matches/:id', MatchesController.editMatchScore);
 
     this.app.get('/leaderboard/home', LeaderboardController.HomeStats);
+    this.app.get('/leaderboard/away', LeaderboardController.AwayStats);
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
