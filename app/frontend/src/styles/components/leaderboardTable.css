@@ -24,7 +24,6 @@
 }
 
 .score-board-classification {
-  background: #023031;
   border-radius: 8px;
   color: white;
   font-family: Verdana , Tahoma , sans-serif;
@@ -37,8 +36,28 @@
   text-align: center;
 }
 
+.zona_libertadores {
+  background-color: #003999;
+}
+
+.pre_libertadores {
+  background-color: #1c8dd8;
+}
+
+.sul_americana {
+  background-color: #009b54;
+}
+
+.standing {
+  background-color: #949090;
+}
+
+.rebaixamento {
+  background: #961212;
+}
+
 .score-board-team-name {
-  background: #036b52;
+  /* background: #036b52; */
   border-radius: 8px;
   color: white;
   font-family: Verdana , Tahoma , sans-serif;
