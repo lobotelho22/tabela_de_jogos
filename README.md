@@ -6,11 +6,11 @@
 
 <br>
 
-O presente projeto apresenta uma tabela de classificação dinâmica, como as encontradas nos mais diversos sites de esporte. Construímos aqui um *backend dockerizado*, utilizando modelagem de dados através do *Sequelize*. Além disso, trabalhamos na costumização de um frontend previamente desenvolvido pela equipe da *Trybe*.
+Este projeto apresenta uma tabela dinâmica de classificação, como aquelas que você encontra em sites de esporte. Nós construímos um **backend dockerizado** e usamos o **Sequelize** para modelar os dados. Também personalizamos um frontend que foi desenvolvido anteriormente pela equipe da **[Trybe](http://betrybe.com)**.
 
-O projeto apresenta uma estrutura de login, que verifica um token gerado no caso dos dados de acesso do usuário ou administrador estarem em acordo com as informações do banco de dados. Através desse login, o usuário ou administrador poderão incluir ou modificar resultados de partidas, alterando de maneira dinâmica a tabela de classificação.
+O projeto possui um sistema de login que verifica se as informações de acesso do usuário ou administrador estão corretas. Se estiverem, é gerado um token. Usando este token, o usuário ou administrador pode adicionar ou modificar resultados de jogos, fazendo com que a tabela de classificação seja atualizada em tempo real.
 
-Para aproximarmos o projeto de um uso real, alteramos o frontend, caracterizando-o com dados do *Campeonato Brasileiro de 2023, série A*. Vejamos como o projeto está estruturado, para compreendermos melhor seu funcionamento.
+Para tornar o projeto mais realista, personalizamos o frontend para o Campeonato Brasileiro de 2023, série A. Vamos dar uma olhada na estrutura do projeto para entender melhor como ele funciona.
 
 <br />
 
@@ -34,7 +34,8 @@ Para aproximarmos o projeto de um uso real, alteramos o frontend, caracterizando
 - O acesso ao frontend é feito na porta `3000` do `localhost`, por padrão;
 - Foi utilizado o `React` para a construção das páginas, lançando mão da componentização, para deixar o layout mais dinâmico;
 - A estilização dos componentes foi feita com CSS, sem utilização de qualquer framework;
-- O projeto ainda não é totalmente responsivo. Para melhores resultados o ideal é que ele seja exibido em uma resolução mínima de `600 x 400` pixels.
+- O projeto ainda não é totalmente responsivo. Para melhores resultados o ideal é que ele seja exibido em uma resolução mínima de `600 x 400` pixels;
+- Para testar o login da aplicação, use as contas: `admin@admin.com`, senha: `secret_admin` e `user@user.com` senha: `secret_user`.
 
 ### `Docker`
 
