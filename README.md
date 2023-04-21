@@ -1,5 +1,11 @@
 ## Apresentação
 
+<div align="center">
+<img src=./app/frontend/src/images/brasileirao_assai.svg height=250>
+</div>
+
+<br>
+
 O presente projeto apresenta uma tabela de classificação dinâmica, como as encontradas nos mais diversos sites de esporte. Construímos aqui um *backend dockerizado*, utilizando modelagem de dados através do *Sequelize*. Além disso, trabalhamos na costumização de um frontend previamente desenvolvido pela equipe da *Trybe*.
 
 O projeto apresenta uma estrutura de login, que verifica um token gerado no caso dos dados de acesso do usuário ou administrador estarem em acordo com as informações do banco de dados. Através desse login, o usuário ou administrador poderão incluir ou modificar resultados de partidas, alterando de maneira dinâmica a tabela de classificação.
