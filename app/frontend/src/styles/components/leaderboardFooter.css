@@ -1,0 +1,41 @@
+footer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 15px auto;
+    width: 80%
+}
+
+.leaderboard_sub {
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-right: 2px
+}
+
+.square_icon {
+    background-color: aqua;
+    border-radius: 3px;
+    height: 20px;
+    margin: 0 5px;
+    width: 20px
+}
+
+.lib_color {
+    background-color: #003999;
+}
+
+.preLib_color {
+    background-color: #1c8dd8
+}
+
+.sulAmerican_color {
+    background-color: #009b54
+}
+
+.standing_color {
+    background-color: #949090
+}
+
+.relegation_color {
+    background-color: #961212
+}

@@ -5,6 +5,7 @@ import LoginBtn from '../components/LoginBtn';
 import MatchesBtn from '../components/MatchesBtn';
 import TableFilter from '../components/TableFilter';
 import '../styles/pages/leaderboard.css';
+import FooterLeaderboard from '../components/FooterLeaderboard';
 
 const Leaderboard = () => {
   const [logged, setLogin] = useState(false);
@@ -34,6 +35,7 @@ const Leaderboard = () => {
         currentFilter={ currentFilter }
         setCurrentFilter={ setCurrentFilter }
       />
+      <FooterLeaderboard />
     </>
   );
 };

@@ -141,12 +141,17 @@ class LeaderboardService {
     let goalsFavor = 0;
     let goalsOwn = 0;
 
-    if (isHome) {
+    const homeList:Array<number> = matches.map((match) => match.homeTeamGoals);
+    const awayList:Array<number> = matches.map((match) => match.awayTeamGoals);
+
+    const testHomeAway = Boolean(homeList.length && awayList.length);
+
+    if (isHome && testHomeAway) {
       goalsFavor = matches.map((match) => match.homeTeamGoals).reduce((total, num) => total + num);
       goalsOwn = matches.map((match) => match.awayTeamGoals).reduce((total, num) => total + num);
     }
 
-    if (!isHome) {
+    if (!isHome && testHomeAway) {
       goalsFavor = matches.map((match) => match.awayTeamGoals).reduce((total, num) => total + num);
       goalsOwn = matches.map((match) => match.homeTeamGoals).reduce((total, num) => total + num);
     }

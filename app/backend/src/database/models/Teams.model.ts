@@ -6,6 +6,7 @@ import db from '.';
 class TeamModel extends Model {
   declare id: number;
   declare teamName: string;
+  declare image: string;
 }
 
 TeamModel.init({
@@ -19,6 +20,10 @@ TeamModel.init({
     allowNull: false,
     type: DataTypes.STRING,
   },
+  image: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  }
 }, {
   // ... Outras configs
   underscored: true,

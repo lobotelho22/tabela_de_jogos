@@ -41,6 +41,22 @@ const LeaderboardTable = ({ currentFilter }) => {
     return (<Loading />);
   }
 
+  const lead_standings = (index) => {
+    if (index <= 4)  {
+      return "zona_libertadores"
+    }
+    if (index <= 6){
+      return "pre_libertadores"
+    }
+    if (index <= 12) {
+      return "sul_americana"
+    }
+    if (index <= 16) {
+      return "standing"
+    }
+    return "rebaixamento"
+  }
+
   return (
     <section className="score-board-table-section">
       <table className="score-board-table">
@@ -76,13 +92,13 @@ const LeaderboardTable = ({ currentFilter }) => {
             index) => (
               <tr key={ uuidv4() }>
                 <td
-                  className="score-board-classification"
+                  className={`score-board-classification ${ lead_standings(index + 1) }`}
                   data-testid={ `score_boarding__classification_${index + 1}` }
                 >
                   {`${index + 1}`}
                 </td>
                 <td
-                  className="score-board-team-name"
+                  className={`score-board-team-name ${ lead_standings(index + 1) }`}
                   data-testid={ `score_boarding__team_name_${index + 1}` }
                 >
                   {name}

@@ -1,0 +1,19 @@
+h2 {
+    color: #26353e;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 42px;
+    line-height: 50px;
+    margin: 20px 0;
+    text-align: center;    
+}
+
+.crests_line {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    width: 65%;
+}
+
+img {
+    height: 62px
+}

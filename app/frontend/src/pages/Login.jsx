@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Header from '../components/Header';
+import CrestsPainel from '../components/CrestsPainel';
 import LeaderboardBtn from '../components/LeaderboardBtn';
 import MatchesBtn from '../components/MatchesBtn';
 import { requestLogin, setToken, requestData } from '../services/requests';
-import { positiveLogo } from '../images';
 import '../styles/pages/login.css';
 
 const Login = () => {
@@ -47,7 +47,7 @@ const Login = () => {
         SecondNavegationLink={ MatchesBtn }
       />
       <section className="user-login-area">
-        <img src={ positiveLogo } alt="Trybe Futebol Clube Negative Logo" />
+        <CrestsPainel />
         <form>
           <h1>Área do usuário</h1>
           <label htmlFor="email-input">
