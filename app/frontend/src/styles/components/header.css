@@ -47,7 +47,7 @@
   height: 40px;
   justify-content: center;
   line-height: 150%;
-  margin-right: 10px;
+  margin: 5px;
   text-decoration: none;
   width: 164px;
 }
@@ -64,9 +64,9 @@
 }
 
 .buttons-content {
-  align-items: center;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .buttons-content button {

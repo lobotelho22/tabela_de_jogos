@@ -14,7 +14,6 @@ const FooterLeaderboard = () => {
             <div className="leaderboard_sub">Manutenção</div>
             <div className="square_icon relegation_color" />
             <div className="leaderboard_sub">Rebaixamento</div>
-            
         </footer>
     )
 }
